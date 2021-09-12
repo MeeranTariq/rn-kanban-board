@@ -103,7 +103,7 @@ class Board extends React.Component {
       const scrollOffset = column.scrollOffset() + 70 * anOffset;
       this.props.rowRepository.setScrollOffset(column.id(), scrollOffset);
 
-      column.listView().scrollTo({ y: scrollOffset });
+      column.listView().scrollToOffset({offset: offset, animated: true});
     }
 
     this.props.rowRepository.move(draggedItem, this.x, this.y);
@@ -148,7 +148,8 @@ class Board extends React.Component {
       this.state.rotate,
       {
         toValue: value,
-        duration: 5000
+        duration: 5000,
+        useNativeDriver: true
       }
     ).start();
   }

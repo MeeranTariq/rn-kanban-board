@@ -40,8 +40,16 @@ class RowRepository {
     });
   }
 
-  notify(columnId, event) {
-    this.listeners[columnId][event]();
+  notify(columnId, event) {	
+    // IMPORTANT: - Reloading the app (cmd + s) while on workorders screen	
+    // will reset the listeners back to {}. So the app won't work as expected.	
+    // ofcourse this won't happen on the production, since app can't be reloaded.	
+    try {	
+      this.listeners[columnId][event]();	
+    }	
+    catch (e) {	
+      console.log(e);	
+    }	
   }
 
   setScrollOffset(columnId, scrollOffset) {
